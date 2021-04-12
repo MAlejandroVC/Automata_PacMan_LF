@@ -39,18 +39,17 @@ public class Pacman extends JPanel implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if(e.getKeyCode() == KeyEvent.VK_ENTER){
-            new Thread( () -> {
-                while (true){
-                    update();
-                    try{
-                        Thread.sleep(10);
-                    }catch(InterruptedException err){
-                        err.printStackTrace();
-                    }
+
+        new Thread( () -> {
+            while (true){
+                update();
+                try{
+                    Thread.sleep(10);
+                }catch(InterruptedException err){
+                    err.printStackTrace();
                 }
-            }).start();
-        }
+            }
+        }).start();
 
         int SPEED = 4;
 
@@ -69,6 +68,8 @@ public class Pacman extends JPanel implements KeyListener {
         if(e.getKeyCode() == KeyEvent.VK_DOWN && player.y < (getHeight() - player.height)){
             player.y += SPEED;
         }
+
+
     }
 
     @Override
