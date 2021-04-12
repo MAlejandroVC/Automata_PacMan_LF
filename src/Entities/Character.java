@@ -1,15 +1,25 @@
 package Entities;
 
-public class Character {
-    private String icon;
-    private Color color;
-    private int x, y;
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
-    public Character(String icon, Color color, int x, int y) {
-        this.icon = icon;
-        this.color = color;
+public class Character {
+    private Image img;
+    public int x, y;
+    public int width, height;
+
+    public Character(String img, int x, int y) {
+        try {
+            this.img = ImageIO.read(new File("src/images/" + img));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         this.x = x;
         this.y = y;
+        width = 16;
+        height = 16;
     }
 
     public void move(int x, int y){
@@ -17,15 +27,7 @@ public class Character {
         this.y += y;
     }
 
-    public String getIcon() {
-        return icon;
-    }
-
-    public Color getColor(){
-        return color;
-    }
-
-    public void print(){
-        Color.println(this.icon, this.color);
+    public void draw(Graphics g, Component c){
+        g.drawImage(img, x, y, width, height, c);
     }
 }
